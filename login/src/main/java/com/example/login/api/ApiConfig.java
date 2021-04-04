@@ -8,4 +8,5 @@ public class ApiConfig {
     public static String SET_NEW_WORD = "/user/inform/updatepwd";  //初始登录设置新密码;
     public static String GET_CODE_CHANGE_PASSWORD = "/user/updatepassword/getCode";  //修改密码时发送验证码;
     public static String POST_CODE_CHANGE_PASSWORD = "/user/updatepassword/judgeCode";  //修改密码时校验验证码;
+    public static String GET_USER_INFO = "/user/infom/get"; //获取用户信息
 }
