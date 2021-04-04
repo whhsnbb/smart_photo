@@ -14,6 +14,12 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +32,8 @@ dependencies {
     api rootProject.ext.androidxLibs
     api rootProject.ext.commonLibs
     api rootProject.ext.annotationLibs
+    api rootProject.ext.retrofitLibs
+    api rootProject.ext.toolLibs
     testImplementation 'junit:junit:4.13.2'
     api 'org.greenrobot:eventbus:3.1.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

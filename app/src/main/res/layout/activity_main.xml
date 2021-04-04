@@ -5,14 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17.5dp"
+            android:layout_marginStart="17.5dp"
+            android:background="@drawable/userinfo_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_icon"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/user"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                />
+
+
+            <TextView
+                android:textColor="#000000"
+                android:id="@+id/user_name"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="12.5sp"
+                android:text="NI-MING"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
 
     <fragment
         android:id="@+id/main_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="false"
         android:layout_width="match_parent"
-        android:layout_weight="9"
+        android:layout_weight="10"
         android:layout_height="0dp"
         app:navGraph="@navigation/nav_graph"/>
 
