@@ -1,3 +1,4 @@
+include ':edit'
 include ':mine'
 include ':login'
 include ':common'

@@ -37,7 +37,8 @@ ext{
 
     tool = [
 
-            "circleimage" : 'de.hdodenhof:circleimageview:3.1.0'
+            "circleimage" : 'de.hdodenhof:circleimageview:3.1.0',
+            "photoview"   :  'com.github.chrisbanes.photoview:library:1.2.4'
 
     ]
 

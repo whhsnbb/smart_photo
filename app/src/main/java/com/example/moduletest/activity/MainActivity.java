@@ -1,15 +1,21 @@
-package com.example.moduletest;
+package com.example.moduletest.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -18,12 +24,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.common.Bean.UserInfo;
 import com.example.common.Utils.UserAccountUtils;
+import com.example.moduletest.R;
 import com.example.moduletest.userinfo.InfoService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
@@ -36,11 +41,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Route(path = "/Main/MainActivity")
 public class MainActivity extends AppCompatActivity {
-    
+
     private static final String BASE_URL = "http://192.168.1.219/smart_photo/";
-    
-    private BottomNavigationView bottomNavigationView;
-    
+
     private File iconFile;
 
     private TextView username;
@@ -49,18 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
     private UserInfo userInfo;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Init();
-        loadUserInfo(BASE_URL);
+        loadUserInfo();
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void Init(){
         NavController navController = Navigation.findNavController(this,R.id.main_fragment);
-        bottomNavigationView = findViewById(R.id.main_bar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.main_bar);
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
         // 状态栏透明|字体为黑
         if (Build.VERSION.SDK_INT >= 21) {
@@ -73,31 +78,35 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+
         //绑定id
         usericon = findViewById(R.id.user_icon);
         username = findViewById(R.id.user_name);
+        RelativeLayout relativeLayout = findViewById(R.id.user_all);
+        
+        
+        //申请权限
+        RequestPremission();
 
-        //设置点击事件
 
-
-
-        //创建用户头像文件
-
+        // TODO: 2021/4/6 这里设置点击事件 
         
 
     }
 
     //拉取用户信息
-    private void loadUserInfo(String baseurl){
+    private void loadUserInfo(){
 
         //请求用户信息
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseurl)
+                .baseUrl(MainActivity.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         InfoService infoService = retrofit.create(InfoService.class);
 
+        // TODO: 2021/4/6 Token未获取 
         Call<UserInfo> call = infoService.getUserInfo("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc1Mjk4NTEsInVzZXJJZCI6MzF9." +
                 "jj18TYbK9qaSEnseSuPxuqyWRHgKIy7W85w92ZN-tQk1617443451444110019");
 
@@ -105,26 +114,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserInfo> call, retrofit2.Response<UserInfo> response) {
 
-                Log.e("TAG",response.body().toString());
-
                 userInfo = response.body();
                 if(userInfo != null && userInfo.getStatus() == 1){
-                    Log.e("TAG","false_1");
                 }else {
-                    Log.e("TAG","hhh");
-                    Log.e("TAG",userInfo.getData().getPhone());
                     loadUserIcon();
                 }
             }
             @Override
             public void onFailure(Call<UserInfo> call, Throwable t) {
-                Log.e("TAG",t.getMessage());
+                t.getMessage();
             }
         });
 
     }
-
-
     //下载用户头像
     private void loadUserIcon(){
         File file = new File(getExternalFilesDir(null),"/user/userIcon");
@@ -144,31 +146,28 @@ public class MainActivity extends AppCompatActivity {
 
         }else{
 
+            // TODO: 2021/4/6 这里Url有点问题，Retrofit有问题 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://xinil.oss-cn-shanghai.aliyuncs.com/smart_photo/")
+                    .baseUrl("")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             InfoService infoService = retrofit.create(InfoService.class);
 
-            Call<ResponseBody> userIcon = infoService.getUserIcon();
+            Call<ResponseBody> userIcon = infoService.getUserIcon(UserAccountUtils.getUserToken().getToken());
 
             userIcon.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
 
-                    InputStream inputStream = null;
+                    InputStream inputStream;
                     byte[] bytes = new byte[1024];
-                    FileOutputStream fileOutputStream = null;
+                    FileOutputStream fileOutputStream;
                     int len;
                     try {
 
-                        if(response.body() == null){
-                            Log.e("TAG","null");
-                        }
-
+                        assert response.body() != null;
                         inputStream = response.body().byteStream();
-                        Log.e("TAG",response.body().byteStream().toString());
                         fileOutputStream = new FileOutputStream(iconFile);
                         while((len = inputStream.read(bytes)) != -1){
                             fileOutputStream.write(bytes,0,len);
@@ -183,11 +182,9 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("TAG",t.getMessage());
+                    t.getMessage();
                 }
             });
-
-//            Log.e("TAG",userInfo.getData().getPortrait());
 
             Glide.with(this)
                     .load(iconFile)
@@ -196,6 +193,29 @@ public class MainActivity extends AppCompatActivity {
 
         }
         username.setText(userInfo.getData().getUsername());
+    }
+
+    private void RequestPremission(){
+        if(ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }else{
+            return;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    return;
+                }else{
+                    return;
+                }
+        }
     }
 
 }
