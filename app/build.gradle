@@ -21,6 +21,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,9 +35,13 @@ android {
 }
 
 dependencies {
+
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":common")
     api rootProject.ext.annotationLibs
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     if (!ismodule.toBoolean()){
         implementation project(":login")
     }
