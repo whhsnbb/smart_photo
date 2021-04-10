@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:fitsSystemWindows="true"
+    tools:context=".EditActivity">
+
+
+    <com.nullpointerexception.edit.cropper.CropImageView
+        android:id="@+id/Img"
+        android:src="@mipmap/test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/Img"-->
+<!--        android:src="@mipmap/test"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="150dp"
+        android:background="#00FFFFFF">
+
+        <View
+            android:id="@+id/none"
+            android:background="#00FF0000"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <SeekBar
+            android:id="@+id/hue"
+            android:visibility="gone"
+            android:thumbTint="#FFFFFF"
+            android:progressTint="#FFFFFF"
+            android:progressBackgroundTint="#CACACA"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <SeekBar
+            android:id="@+id/sat"
+            android:visibility="gone"
+            android:thumbTint="#FFFFFF"
+            android:progressTint="#FFFFFF"
+            android:progressBackgroundTint="#CACACA"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <SeekBar
+            android:id="@+id/lum"
+            android:visibility="gone"
+            android:thumbTint="#FFFFFF"
+            android:progressTint="#FFFFFF"
+            android:progressBackgroundTint="#CACACA"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/set_hue"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@mipmap/hue"
+                    android:layout_width="27.5dp"
+                    android:layout_height="27.5dp"/>
+                <TextView
+                    android:text="色调"
+                    android:textSize="12sp"
+                    android:textColor="#FFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/set_sat"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@mipmap/saturation"
+                    android:layout_width="27.5dp"
+                    android:layout_height="27.5dp"/>
+                <TextView
+                    android:text="饱和度"
+                    android:textSize="12sp"
+                    android:textColor="#FFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/set_lum"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@mipmap/lum"
+                    android:layout_width="27.5dp"
+                    android:layout_height="27.5dp"/>
+                <TextView
+                    android:text="亮度"
+                    android:textSize="12sp"
+                    android:textColor="#FFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/to_cut"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@mipmap/cut"
+                    android:layout_width="27.5dp"
+                    android:layout_height="27.5dp"/>
+                <TextView
+                    android:text="裁剪"
+                    android:textSize="12sp"
+                    android:textColor="#FFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/yes"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@mipmap/yes"
+                    android:layout_width="27.5dp"
+                    android:layout_height="27.5dp"/>
+                <TextView
+                    android:text="确认"
+                    android:textSize="12sp"
+                    android:textColor="#FFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
