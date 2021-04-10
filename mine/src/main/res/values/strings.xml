@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mine</string>
+    <string name="exit">退出登录</string>
 </resources>

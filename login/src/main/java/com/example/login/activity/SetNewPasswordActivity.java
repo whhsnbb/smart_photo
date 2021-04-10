@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.login.R;
-import com.example.login.api.Api;
-import com.example.login.api.ApiConfig;
+import com.example.login.api.login_Api;
+import com.example.login.api.login_ApiConfig;
 import com.example.login.api.MyLoginCallback;
 import com.example.login.response.LoginResponse;
 import com.example.login.util.SpaceFilter;
@@ -33,7 +33,7 @@ public class SetNewPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String newPassword = edt_setPassword.getText().toString().trim();
                 if(newPassword.length() >= 6 && newPassword.length() <= 20){
-                    Api.config(ApiConfig.SET_NEW_WORD,newPassword,Api.TYPE_SetNewPassword).postNewPassword(SetNewPasswordActivity.this, new MyLoginCallback() {
+                    login_Api.config(login_ApiConfig.SET_NEW_WORD,newPassword, login_Api.TYPE_SetNewPassword).postNewPassword(SetNewPasswordActivity.this, new MyLoginCallback() {
                         @Override
                         public void onSuccess(String result) {
                             Gson gson = new Gson();

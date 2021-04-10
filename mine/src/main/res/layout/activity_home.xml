@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDEDED"
+    android:orientation="vertical"
+    tools:context=".activity.HomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/btn_toApp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@mipmap/left_goback"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/item_background" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/item_account"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/item_background"
+        android:paddingLeft="19dp">
+
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/account" />
+
+        <LinearLayout
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="13dp"
+            android:layout_toRightOf="@id/img_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:text="个性签名"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/item_right"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentRight="true"
+            />
+
+        <com.example.mine.ItemView
+            android:id="@+id/item_encryption"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            app:tv_content=""
+            app:tv_title="加密相册" />
+    </RelativeLayout>
+
+            <com.example.mine.ItemView
+                android:id="@+id/item_backUp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                app:tv_content=""
+                app:tv_title="备份详情" />
+
+            <com.example.mine.ItemView
+                android:id="@+id/item_setting_backUp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:tv_content=""
+                app:tv_title="云备份设置" />
+
+            <com.example.mine.ItemView
+                android:id="@+id/item_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:tv_content=""
+                app:tv_title="回收站" />
+
+            <com.example.mine.ItemView
+                android:id="@+id/item_aboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                app:tv_content=""
+                app:tv_title="关于我们" />
+
+            <com.example.mine.ItemView
+                android:id="@+id/item_renew"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:tv_content="1.0.0"
+                app:tv_title="版本更新" />
+
+
+            <Button
+                android:id="@+id/btn_exit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/item_background"
+                android:text="@string/exit"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="158dp"
+                android:text="欢迎使用智慧相册"
+                android:textSize="15sp"
+                android:textColor="#A5A5A5"/>
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

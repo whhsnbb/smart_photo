@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.login.R;
-import com.example.login.api.Api;
-import com.example.login.api.ApiConfig;
+import com.example.login.api.login_Api;
+import com.example.login.api.login_ApiConfig;
 import com.example.login.api.MyLoginCallback;
 import com.example.login.response.LoginResponse;
 import com.example.login.util.MobileUtil;
@@ -46,7 +46,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String phoneNumber = edt_phone.getText().toString().trim();
                 if (MobileUtil.checkPhone(phoneNumber)) {
-                    Api.config(ApiConfig.GET_CODE_CHANGE_PASSWORD,phoneNumber,Api.TYPE_GetYzm).postLoginRequest(ChangePasswordActivity.this,Api.TYPE_GetYzm, new MyLoginCallback() {
+                    login_Api.config(login_ApiConfig.GET_CODE_CHANGE_PASSWORD,phoneNumber, login_Api.TYPE_GetYzm).postLoginRequest(ChangePasswordActivity.this, login_Api.TYPE_GetYzm, new MyLoginCallback() {
                         @Override
                         public void onSuccess(String result) {
                             Gson gson = new Gson();
@@ -106,7 +106,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
             return;
         }
-        Api.config(ApiConfig.POST_CODE_CHANGE_PASSWORD,phone,password,yzm).postUpdatePassword(new MyLoginCallback() {
+        login_Api.config(login_ApiConfig.POST_CODE_CHANGE_PASSWORD,phone,password,yzm).postUpdatePassword(new MyLoginCallback() {
             @Override
             public void onSuccess(String result) {
                 Log.e("onSuccess", result);

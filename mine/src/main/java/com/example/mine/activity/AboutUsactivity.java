@@ -1,14 +1,16 @@
-package com.example.mine;
+package com.example.mine.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Home_MineActivity extends AppCompatActivity {
+import com.example.mine.R;
+
+public class AboutUsactivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home__mine);
+        setContentView(R.layout.activity_about_usactivity);
     }
 }

@@ -1,13 +1,13 @@
 package com.example.login.util;
 
-public class UserInfo {
+public class login_UserInfo {
     private String account;
     private String password;
 
-    public UserInfo() {
+    public login_UserInfo() {
     }
 
-    public UserInfo(String account, String password) {
+    public login_UserInfo(String account, String password) {
         this.account = account;
         this.password = password;
     }

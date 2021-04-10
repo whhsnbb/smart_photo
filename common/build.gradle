@@ -26,6 +26,7 @@ dependencies {
     api rootProject.ext.androidxLibs
     api rootProject.ext.commonLibs
     api rootProject.ext.annotationLibs
+    api rootProject.ext.retrofitLibs
     testImplementation 'junit:junit:4.13.2'
     api 'org.greenrobot:eventbus:3.1.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
