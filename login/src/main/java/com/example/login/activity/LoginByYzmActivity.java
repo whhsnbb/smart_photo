@@ -19,8 +19,8 @@ import com.example.login.util.MobileUtil;
 import com.example.login.util.MyCountDownTimer;
 import com.example.login.util.StringUtils;
 
-import com.example.login.api.login_Api;
-import com.example.login.api.login_ApiConfig;
+import com.example.login.api.Login_Api;
+import com.example.login.api.Login_ApiConfig;
 import com.example.login.api.MyLoginCallback;
 import com.google.gson.Gson;
 
@@ -44,7 +44,7 @@ public class LoginByYzmActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String phoneNumber = edt_phoneNumber.getText().toString().trim();
                 if (MobileUtil.checkPhone(phoneNumber)) {
-                    login_Api.config(login_ApiConfig.GET_CODE, phoneNumber, login_Api.TYPE_GetYzm).postLoginRequest(LoginByYzmActivity.this, login_Api.TYPE_GetYzm, new MyLoginCallback() {
+                    Login_Api.config(Login_ApiConfig.GET_CODE, phoneNumber, Login_Api.TYPE_GetYzm).postLoginRequest(LoginByYzmActivity.this, Login_Api.TYPE_GetYzm, new MyLoginCallback() {
                         @Override
                         public void onSuccess(String result) {
                             Gson gson = new Gson();
@@ -114,7 +114,7 @@ public class LoginByYzmActivity extends AppCompatActivity {
             Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show();
             return;
         }
-        login_Api.config(login_ApiConfig.LOGIN_YZM,phoneNumber,yzm, login_Api.TYPE_PostYzm).postLoginRequest(LoginByYzmActivity.this, login_Api.TYPE_PostYzm, new MyLoginCallback() {
+        Login_Api.config(Login_ApiConfig.LOGIN_YZM,phoneNumber,yzm, Login_Api.TYPE_PostYzm).postLoginRequest(LoginByYzmActivity.this, Login_Api.TYPE_PostYzm, new MyLoginCallback() {
             @Override
             public void onSuccess(final String result) {
                 Log.e("onSuccess", result);

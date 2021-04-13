@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EDEDED"
+    tools:context=".activity.AccountActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/btn_account_toHome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@mipmap/left_goback"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/item_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人信息"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_portrait"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:background="@drawable/item_background"
+        >
+        <TextView
+            android:id="@+id/tv_portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#636363"
+            android:text="头像"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:id="@+id/img_portrait"
+            android:src="@mipmap/account"
+            android:layout_toLeftOf="@id/account_right_arrow"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:textColor="#cdcdcd"
+            android:layout_marginRight="40dp"
+            android:gravity="right"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/account_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/right_arrow" />
+
+        <ImageView
+            android:id="@+id/bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#EDEDED" />
+    </RelativeLayout>
+
+    <com.example.mine.view.ItemView
+        android:id="@+id/item_account_username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tv_title="昵称"
+        app:tv_content=""/>
+
+    <com.example.mine.view.ItemView
+        android:id="@+id/item_account_introduce"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tv_title="个性签名"
+        app:tv_content=""/>
+
+    <com.example.mine.view.ItemView
+        android:id="@+id/item_account_gender"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tv_title="性别"
+        app:tv_content=""/>
+
+    <com.example.mine.view.ItemView
+        android:id="@+id/item_account_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tv_title="生日"
+        app:tv_content=""/>
+
+    <com.example.mine.view.ItemView
+        android:id="@+id/item_account_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tv_title="手机号"
+        app:tv_content=""/>
+
+    <com.example.mine.view.ItemView
+        android:id="@+id/item_account_changePassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tv_title="账号和密码"
+        app:tv_content=""/>
+
+
+
+
+</LinearLayout>

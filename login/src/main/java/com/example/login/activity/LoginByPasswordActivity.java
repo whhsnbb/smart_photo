@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.login.R;
-import com.example.login.api.login_Api;
-import com.example.login.api.login_ApiConfig;
+import com.example.login.api.Login_Api;
+import com.example.login.api.Login_ApiConfig;
 import com.example.login.api.MyLoginCallback;
 import com.example.login.response.LoginResponse;
 import com.example.login.util.MobileUtil;
@@ -73,7 +73,7 @@ public class LoginByPasswordActivity extends AppCompatActivity {
             Toast.makeText(this,"请输入密码",Toast.LENGTH_SHORT).show();
             return;
         }
-        login_Api.config(login_ApiConfig.LOGIN_PASSWORD,phoneNumber,password, login_Api.TYPE_Password).postLoginRequest(LoginByPasswordActivity.this, login_Api.TYPE_Password, new MyLoginCallback() {
+        Login_Api.config(Login_ApiConfig.LOGIN_PASSWORD,phoneNumber,password, Login_Api.TYPE_Password).postLoginRequest(LoginByPasswordActivity.this, Login_Api.TYPE_Password, new MyLoginCallback() {
             @Override
             public void onSuccess(final String result) {
                 runOnUiThread(new Runnable() {

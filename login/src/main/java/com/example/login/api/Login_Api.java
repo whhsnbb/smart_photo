@@ -17,27 +17,27 @@ import okhttp3.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class login_Api {
+public class Login_Api {
     public static int TYPE_PostYzm = 1;
     public static int TYPE_GetYzm = 2;
     public static int TYPE_Password = 3;
     public static int TYPE_SetNewPassword = 4;
     private static OkHttpClient client;
     private static String requestUrl;
-    public static login_Api api = new login_Api();
+    public static Login_Api api = new Login_Api();
     public static String mPhoneNumber;
     public static String mYzm;
     public static String mPassword;
     public static String newPassword;
 
-    public login_Api(){
+    public Login_Api(){
 
     }
 
-    public static login_Api config(String url, String text, int type) {
+    public static Login_Api config(String url, String text, int type) {
         client = new OkHttpClient.Builder()
                 .build();
-        requestUrl = login_ApiConfig.BASE_URL + url;
+        requestUrl = Login_ApiConfig.BASE_URL + url;
         if(type == TYPE_GetYzm) {
             mPhoneNumber = text;
         }else if(type == TYPE_SetNewPassword){
@@ -46,23 +46,23 @@ public class login_Api {
         return api;
     }
 
-    public static login_Api config(String url, String phoneNumber, String text, int type) {
+    public static Login_Api config(String url, String phoneNumber, String text, int type) {
         client = new OkHttpClient.Builder()
                 .build();
-        requestUrl = login_ApiConfig.BASE_URL + url;
+        requestUrl = Login_ApiConfig.BASE_URL + url;
         mPhoneNumber = phoneNumber;
-        if(type == login_Api.TYPE_Password){
+        if(type == Login_Api.TYPE_Password){
             mPassword = text;
-        }else if(type == login_Api.TYPE_PostYzm){
+        }else if(type == Login_Api.TYPE_PostYzm){
             mYzm = text;
         }
         return api;
     }
 
-    public static login_Api config(String url, String phoneNumber, String newPassword, String yzm) {
+    public static Login_Api config(String url, String phoneNumber, String newPassword, String yzm) {
         client = new OkHttpClient.Builder()
                 .build();
-        requestUrl = login_ApiConfig.BASE_URL + url;
+        requestUrl = Login_ApiConfig.BASE_URL + url;
         mPhoneNumber = phoneNumber;
         mPassword = newPassword;
         mYzm = yzm;

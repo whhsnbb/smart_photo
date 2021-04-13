@@ -1,4 +1,4 @@
-package com.example.mine;
+package com.example.mine.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import com.example.mine.R;
 
 public class ItemView extends LinearLayout{
 

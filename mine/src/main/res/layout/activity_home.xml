@@ -15,7 +15,7 @@
         android:background="@android:color/white">
 
         <Button
-            android:id="@+id/btn_toApp"
+            android:id="@+id/btn_home_toApp"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
@@ -45,7 +45,7 @@
         android:paddingLeft="19dp">
 
         <ImageView
-            android:id="@+id/img_header"
+            android:id="@+id/img_home_header"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@mipmap/account" />
@@ -53,13 +53,14 @@
         <LinearLayout
             android:layout_marginTop="13dp"
             android:layout_marginStart="13dp"
-            android:layout_toRightOf="@id/img_header"
+            android:layout_toRightOf="@id/img_home_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_home_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="用户"
@@ -67,6 +68,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tv_home_introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -84,49 +86,44 @@
             android:layout_alignParentRight="true"
             />
 
-        <com.example.mine.ItemView
-            android:id="@+id/item_encryption"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            app:tv_content=""
-            app:tv_title="加密相册" />
+
     </RelativeLayout>
 
-            <com.example.mine.ItemView
+            <com.example.mine.view.ItemView
                 android:id="@+id/item_backUp"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 app:tv_content=""
-                app:tv_title="备份详情" />
+                app:tv_title="备份照片" />
 
-            <com.example.mine.ItemView
+            <com.example.mine.view.ItemView
                 android:id="@+id/item_setting_backUp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 app:tv_content=""
                 app:tv_title="云备份设置" />
 
-            <com.example.mine.ItemView
+            <com.example.mine.view.ItemView
+                android:id="@+id/item_encryption"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                app:tv_content=""
+                app:tv_title="加密相册" />
+
+            <com.example.mine.view.ItemView
                 android:id="@+id/item_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 app:tv_content=""
                 app:tv_title="回收站" />
 
-            <com.example.mine.ItemView
-                android:id="@+id/item_aboutUs"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                app:tv_content=""
-                app:tv_title="关于我们" />
-
-            <com.example.mine.ItemView
+            <com.example.mine.view.ItemView
                 android:id="@+id/item_renew"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 app:tv_content="1.0.0"
                 app:tv_title="版本更新" />
 
@@ -145,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="158dp"
+                android:layout_marginTop="200dp"
                 android:text="欢迎使用智慧相册"
                 android:textSize="15sp"
                 android:textColor="#A5A5A5"/>
