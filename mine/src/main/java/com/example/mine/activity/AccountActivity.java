@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mine.view.ItemView;
 import com.example.mine.R;
 
@@ -160,7 +159,6 @@ public class AccountActivity extends AppCompatActivity {
                 sp.getString("phone","") + ".jpg");
         Glide.with(this)
                 .load(iconFile)
-                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
                 .into(img_portrait);
         item_username.setContent(sp.getString("username",""));
         item_introduce.setContent(sp.getString("introduce",""));
