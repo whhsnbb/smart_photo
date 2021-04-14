@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Route(path = "/Main/MainActivity")
 public class MainActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "http://192.168.1.219/smart_photo/";
+    private static final String BASE_URL = "http://192.168.1.205/smart_photo/";
 
     private File iconFile;
 
@@ -107,13 +108,12 @@ public class MainActivity extends AppCompatActivity {
         InfoService infoService = retrofit.create(InfoService.class);
 
         // TODO: 2021/4/6 Token未获取 
-        Call<UserInfo> call = infoService.getUserInfo("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTc1Mjk4NTEsInVzZXJJZCI6MzF9." +
-                "jj18TYbK9qaSEnseSuPxuqyWRHgKIy7W85w92ZN-tQk1617443451444110019");
+        Call<UserInfo> call = infoService.getUserInfo("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTgxMzUwMTAsInVzZXJJZCI6NX0.Vp1aYbzxRtjxN7" +
+                "dttGpuY7enPAoOsfN3gmZpenWgfgM1618048610154610374");
 
         call.enqueue(new Callback<UserInfo>() {
             @Override
             public void onResponse(Call<UserInfo> call, retrofit2.Response<UserInfo> response) {
-
                 userInfo = response.body();
                 if(userInfo != null && userInfo.getStatus() == 1){
                 }else {
@@ -145,16 +145,16 @@ public class MainActivity extends AppCompatActivity {
                     .into(usericon);
 
         }else{
-
+            Log.e("TAG",userInfo.getData().getPortrait());
             // TODO: 2021/4/6 这里Url有点问题，Retrofit有问题 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("")
+                    .baseUrl("https://xinil.oss-cn-shanghai.aliyuncs.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             InfoService infoService = retrofit.create(InfoService.class);
 
-            Call<ResponseBody> userIcon = infoService.getUserIcon(UserAccountUtils.getUserToken().getToken());
+            Call<ResponseBody> userIcon = infoService.getUserIcon("smart_photo/default.png");
 
             userIcon.enqueue(new Callback<ResponseBody>() {
                 @Override
