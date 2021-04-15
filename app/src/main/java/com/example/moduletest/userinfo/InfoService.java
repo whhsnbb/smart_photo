@@ -22,5 +22,4 @@ public interface InfoService {
 
     @GET("{url}")
     Call<ResponseBody> getUserIcon(@Path("url") String url);
-    
 }
