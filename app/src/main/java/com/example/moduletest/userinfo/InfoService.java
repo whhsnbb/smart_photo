@@ -15,6 +15,6 @@ public interface InfoService {
     @POST("user/inform/get")
     Call<UserInfo> getUserInfo(@Header("token") String token);
 
-    @HTTP(method = "GET", path = "{url}")
+    @GET("{url}")
     Call<ResponseBody> getUserIcon(@Path("url") String url);
 }
