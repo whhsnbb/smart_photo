@@ -3,5 +3,7 @@
     <declare-styleable name="ItemView">
         <attr name="tv_title" format="string"/>
         <attr name="tv_content" format="string"/>
+        <attr name="show_right_arrow" format="boolean"/>//是否显示右侧小箭头
+        <attr name="clickable" format="boolean"/>//是否显示右侧小箭头
     </declare-styleable>
 </resources>

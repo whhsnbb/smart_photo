@@ -1,5 +1,7 @@
-plugins {
-    id 'com.android.application'
+if (ismodule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
 }
 
 android {
@@ -7,11 +9,21 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.mine"
+        if (ismodule.toBoolean()) {
+            applicationId "com.example.mine"
+        }
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+
+        javaCompileOptions{				//配置ARouter
+            annotationProcessorOptions{
+                includeCompileClasspath false
+                arguments = [AROUTER_MODULE_NAME:project.getName()]
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,16 +34,45 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets{
+        main{
+            if(ismodule.toBoolean()){
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }else{
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets{
+        main{
+            if(ismodule.toBoolean()){
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }else{
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
 }
 
 
 dependencies {
-
     implementation project(":common")
+    implementation rootProject.ext.commonLibs
+    annotationProcessor rootProject.ext.annotationLibs
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:3.2.7'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

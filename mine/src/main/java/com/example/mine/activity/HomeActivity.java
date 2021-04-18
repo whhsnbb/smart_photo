@@ -61,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private Button btn_exit;
 
+    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,15 +76,17 @@ public class HomeActivity extends AppCompatActivity {
             RetrofitUtils.getUserInfo(this, new MyUserInfoCallback() {
                 @Override
                 public void onSuccess(Response<UserInfo> response) {
-                    String userName = response.body().getData().getUsername();
-                    String introduce = response.body().getData().getIntroduce();
                     SharedPreferences.Editor editor = sp.edit();
                     userInfo = response.body();
+                    url = userInfo.getData().getPortrait();
+                    String userName = userInfo.getData().getUsername();
+                    String introduce = userInfo.getData().getIntroduce();
                     editor.putString("username", userInfo.getData().getUsername());
                     editor.putString("introduce", userInfo.getData().getIntroduce());
                     editor.putString("gender", userInfo.getData().getGender());
                     editor.putString("birthday", userInfo.getData().getBirth());
                     editor.putString("phone", userInfo.getData().getPhone());
+                    editor.putString("portrait", userInfo.getData().getPortrait().substring(43));
                     editor.apply();
                     runOnUiThread(new Runnable() {
                         @Override
@@ -102,19 +105,14 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Throwable t) {
                     Log.e("HomeActivity", t.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(HomeActivity.this,"八嘎，没有网络哎",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    Toast.makeText(HomeActivity.this,"请求失败了哎",Toast.LENGTH_SHORT).show();
                     tv_home_username.setText(sp.getString("username", ""));
                     tv_home_introduce.setText(sp.getString("introduce", ""));
                     loadUserIcon();
                 }
             });
         }else{
-            Toast.makeText(this,"没有网络哎",Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeActivity.this,"没有网络哎",Toast.LENGTH_SHORT).show();
             tv_home_username.setText(sp.getString("username", ""));
             tv_home_introduce.setText(sp.getString("introduce", ""));
             loadUserIcon();
@@ -131,46 +129,53 @@ public class HomeActivity extends AppCompatActivity {
         iconFile = new File(file,"user_icon_clip_" +
                 sp.getString("phone","") + ".jpg");
 
-        //下载用户头像
         if(iconFile.exists()){
-
+            Toast.makeText(HomeActivity.this,"我是直接加载的！",Toast.LENGTH_SHORT).show();
             Glide.with(this)
                     .load(iconFile)
                     .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
                     .into(img_header);
-        }else{
-            RetrofitUtils.getUserIcon(this, new MyUserIconCallback() {
-                @Override
-                public void onSuccess(Response<ResponseBody> response) {
-                    InputStream inputStream;
-                    byte[] bytes = new byte[1024];
-                    FileOutputStream fileOutputStream;
-                    int len;
-                    try {
-                        assert response.body() != null;
-                        inputStream = response.body().byteStream();
-                        fileOutputStream = new FileOutputStream(iconFile);
-                        while((len = inputStream.read(bytes)) != -1){
-                            fileOutputStream.write(bytes,0,len);
-                            fileOutputStream.flush();
+        }else {
+            if (url != null) {
+                RetrofitUtils.getUserIcon(this, url, new MyUserIconCallback() {
+                    @Override
+                    public void onSuccess(Response<ResponseBody> response) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(HomeActivity.this, "找到你的头像了哎！", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        InputStream inputStream;
+                        byte[] bytes = new byte[1024];
+                        FileOutputStream fileOutputStream;
+                        int len;
+                        try {
+                            assert response.body() != null;
+                            inputStream = response.body().byteStream();
+                            fileOutputStream = new FileOutputStream(iconFile);
+                            while ((len = inputStream.read(bytes)) != -1) {
+                                fileOutputStream.write(bytes, 0, len);
+                                fileOutputStream.flush();
+                            }
+                            inputStream.close();
+                            fileOutputStream.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        inputStream.close();
-                        fileOutputStream.close();
-                    }catch (Exception e){
-                        e.printStackTrace();
+
+                        Glide.with(HomeActivity.this)
+                                .load(iconFile)
+                                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
+                                .into(img_header);
                     }
 
-                    Glide.with(HomeActivity.this)
-                            .load(iconFile)
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
-                            .into(img_header);
-                }
-
-                @Override
-                public void onFailure(Throwable t) {
-
-                }
-            });
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast.makeText(HomeActivity.this, "没找到你的头像哎！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
     }
 
@@ -207,36 +212,36 @@ public class HomeActivity extends AppCompatActivity {
 
         item_backUp.setItemClickListener(new ItemView.itemClickListener() {
             @Override
-            public void itemClick(String text) {
+            public void itemClick() {
                 Utils.navigateTo(HomeActivity.this,BackUpActivity.class);
             }
         });
 
         item_setting_backUp.setItemClickListener(new ItemView.itemClickListener() {
             @Override
-            public void itemClick(String text) {
+            public void itemClick() {
                 Utils.navigateTo(HomeActivity.this,SettingActivity.class);
             }
         });
 
         item_encryption.setItemClickListener(new ItemView.itemClickListener() {
             @Override
-            public void itemClick(String text) {
+            public void itemClick() {
                 Utils.navigateTo(HomeActivity.this,EncryptionActivity.class);
             }
         });
 
         item_recycler.setItemClickListener(new ItemView.itemClickListener() {
             @Override
-            public void itemClick(String text) {
+            public void itemClick() {
                 Utils.navigateTo(HomeActivity.this,RecyclerActivity.class);
             }
         });
 
         item_renew.setItemClickListener(new ItemView.itemClickListener() {
             @Override
-            public void itemClick(String text) {
-                Toast.makeText(HomeActivity.this,"当前为最新版本:" + text,Toast.LENGTH_SHORT).show();
+            public void itemClick() {
+                Toast.makeText(HomeActivity.this,"当前为最新版本:" + item_renew.getContent(),Toast.LENGTH_SHORT).show();
             }
         });
 

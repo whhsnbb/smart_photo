@@ -112,7 +112,10 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:tv_title="手机号"
-        app:tv_content=""/>
+        app:tv_content=""
+        app:show_right_arrow="false"
+        app:clickable="false"
+        />
 
     <com.example.mine.view.ItemView
         android:id="@+id/item_account_changePassword"
