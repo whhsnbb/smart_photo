@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -17,11 +18,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.example.moduletest.Data.PhotoList;
 import com.example.moduletest.R;
 import com.example.moduletest.wight.PhotoViewPager;
 
+import java.io.File;
 import java.util.List;
 
 import uk.co.senab.photoview.PhotoView;
@@ -87,6 +91,12 @@ public class PhotoShowActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        String where = (String) list.get(position-1);
+                        Log.e("TAG",where);
+                        ARouter.getInstance().build("/edit/EditActivity").withString("path",where).navigation();
+                        finish();
+                        isEdit = !isEdit;
+                        showEdit();
                     }
                 });
 
