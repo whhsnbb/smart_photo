@@ -85,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
         usericon = findViewById(R.id.user_icon);
         username = findViewById(R.id.user_name);
         RelativeLayout relativeLayout = findViewById(R.id.user_all);
-        
-        
+
+
         //申请权限
         RequestPremission();
 
 
-        // TODO: 2021/4/6 这里设置点击事件 
-        
+        // TODO: 2021/4/6 这里设置点击事件
+
 
     }
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         InfoService infoService = retrofit.create(InfoService.class);
 
-        // TODO: 2021/4/6 Token未获取 
+        // TODO: 2021/4/6 Token未获取
         Call<UserInfo> call = infoService.getUserInfo("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTgxMzUwMTAsInVzZXJJZCI6NX0.Vp1aYbzxRtjxN7" +
                 "dttGpuY7enPAoOsfN3gmZpenWgfgM1618048610154610374");
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
         }else{
             Log.e("TAG",userInfo.getData().getPortrait());
-            // TODO: 2021/4/6 这里Url有点问题，Retrofit有问题 
+            // TODO: 2021/4/6 这里Url有点问题，Retrofit有问题
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://xinil.oss-cn-shanghai.aliyuncs.com/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     private void RequestPremission(){
         if(ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        != PackageManager.PERMISSION_GRANTED){
+                != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         }else{
